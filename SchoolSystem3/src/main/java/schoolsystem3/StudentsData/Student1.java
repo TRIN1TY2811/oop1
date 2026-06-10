@@ -8,22 +8,13 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-
 public class Student1 extends JFrame implements ActionListener {
 
-    private JButton btnAttendance, btnGrades, btnBack, btnProfile;
+    private JButton btnAttendance, btnGrades, btnBack;
 
     private JLabel lblTitle;
-    private JLabel lblPersonalTitle;
 
-    // PERSONAL INFO LABELS
-    private JLabel lblName;
-    private JLabel lblBirthdate;
-    private JLabel lblCourse;
-    private JLabel lblGender;
-    private JLabel lblYear;
-
-    private JPanel pnlPanel, pnlPersonal;
+    private JPanel pnlPanel;
 
     public Student1() {
 
@@ -69,16 +60,7 @@ public class Student1 extends JFrame implements ActionListener {
         btnAttendance.setFont(new Font("Arial", Font.BOLD, 18));
 
         pnlPanel.add(btnAttendance);
-        
-        // ================= PROFILE BUTTON =================
-        btnProfile = new JButton("Student");
-        btnProfile.setBounds(170, 300, 220, 40);
-        btnProfile.setFont(new Font("Arial", Font.BOLD, 18));
 
-        pnlPanel.add(btnProfile);
-
-  
-        
         // ================= BACK BUTTON =================
         btnBack = new JButton("Back");
         btnBack.setBounds(650, 620, 100, 30);
