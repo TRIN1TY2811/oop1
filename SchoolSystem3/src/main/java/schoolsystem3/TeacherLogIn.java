@@ -177,7 +177,7 @@ public void actionPerformed(ActionEvent e) {
 
     // ================= BACK =================
     else if (e.getSource() == btnBack) {
-
+dispose();
         Homepage hp = new Homepage();
         hp.setVisible(true);
     }
