@@ -127,7 +127,6 @@ public class TeacherLogIn extends JFrame implements ActionListener {
    @Override
  
 public void actionPerformed(ActionEvent e) {
-   
     if (e.getSource() == btnLogin) {
 
         String username = txtUser.getText().trim();
@@ -170,6 +169,7 @@ public void actionPerformed(ActionEvent e) {
 
     // ================= REGISTER =================
     else if (e.getSource() == btnRegister) {
+   dispose();
 
         TeacherForgotPassword teachforg = new TeacherForgotPassword();
         teachforg.setVisible(true);
@@ -177,7 +177,7 @@ public void actionPerformed(ActionEvent e) {
 
     // ================= BACK =================
     else if (e.getSource() == btnBack) {
-
+dispose();
         Homepage hp = new Homepage();
         hp.setVisible(true);
     }
