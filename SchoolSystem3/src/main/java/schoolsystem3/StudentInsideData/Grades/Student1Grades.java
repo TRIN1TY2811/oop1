@@ -71,6 +71,13 @@ public class Student1Grades extends JFrame implements ActionListener {
 
         txtSearch = new JTextField();
         txtSearch.setBounds(380, 20, 200, 30);
+        txtSearch.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {}
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                if (txtSearch.getText().trim().isEmpty()) searchAll();
+            }
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {}
+        });
         add(txtSearch);
 
         btnSearch = new JButton("Search");
@@ -109,7 +116,6 @@ public class Student1Grades extends JFrame implements ActionListener {
         mainPanel.setBounds(200, 80, 760, 550);
         add(mainPanel);
 
-        // Each panel method fills its own class-level arrays directly
         mainPanel.add(createOOPPanel(),   "OOP");
         mainPanel.add(createIntegPanel(), "INTEG");
         mainPanel.add(createCPPanel(),    "CP");
@@ -123,10 +129,12 @@ public class Student1Grades extends JFrame implements ActionListener {
         add(btnBack);
 
         setVisible(true);
+
+        // Auto-load all data on startup
+        searchAll();
     }
 
     // ================= PANEL BUILDERS =================
-    // Each method assigns directly into the class-level arrays so loadTable can update them
 
     private JPanel createOOPPanel() {
         JPanel panel = new JPanel(null);
@@ -248,6 +256,7 @@ public class Student1Grades extends JFrame implements ActionListener {
     }
 
     // ================= SEARCH ALL TABLES =================
+
     private void searchAll() {
         loadTable("oopgrades",   oopID,   oopName,   oopQuiz,   oopProject,   oopExam,   oopFinalGrade);
         loadTable("integgrades", integID, integName, integQuiz, integProject, integExam, integFinalGrade);
@@ -257,6 +266,7 @@ public class Student1Grades extends JFrame implements ActionListener {
     }
 
     // ================= REUSABLE LOADER =================
+
     private void loadTable(String table,
                            JTextField[] id,
                            JTextField[] name,
@@ -266,6 +276,16 @@ public class Student1Grades extends JFrame implements ActionListener {
                            JTextField[] finalGrade) {
 
         String key = txtSearch.getText().trim();
+
+        // Clear rows first
+        for (int i = 0; i < 10; i++) {
+            id[i].setText("");
+            name[i].setText("");
+            quiz[i].setText("");
+            project[i].setText("");
+            exam[i].setText("");
+            finalGrade[i].setText("");
+        }
 
         try (Connection conn = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/schoolsystemdb",
@@ -278,41 +298,37 @@ public class Student1Grades extends JFrame implements ActionListener {
                 pst = conn.prepareStatement("SELECT * FROM " + table);
             } else {
                 pst = conn.prepareStatement(
-                    "SELECT * FROM " + table + " WHERE ID=? OR Name=?");
+                    "SELECT * FROM " + table + " WHERE student_id=? OR name=?");
                 pst.setString(1, key);
                 pst.setString(2, key);
             }
 
             ResultSet rs = pst.executeQuery();
 
-            // Clear rows first
-            for (int i = 0; i < 10; i++) {
-                id[i].setText("");
-                name[i].setText("");
-                quiz[i].setText("");
-                project[i].setText("");
-                exam[i].setText("");
-                finalGrade[i].setText("");
-            }
-
             int i = 0;
-
             while (rs.next() && i < 10) {
-                id[i].setText(rs.getString("ID"));
-                name[i].setText(rs.getString("Name"));
-                quiz[i].setText(rs.getString("Quiz"));
-                project[i].setText(rs.getString("Project"));
-                exam[i].setText(rs.getString("Exam"));
-                finalGrade[i].setText(rs.getString("FinalGrade"));
+                id[i].setText(rs.getString("student_id"));
+                name[i].setText(rs.getString("name"));
+                quiz[i].setText(rs.getString("quiz"));
+                project[i].setText(rs.getString("project"));
+                exam[i].setText(rs.getString("exam"));
+                finalGrade[i].setText(rs.getString("final_grade"));
                 i++;
             }
 
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,
+                "Error loading table: " + table + "\n\n" + ex.getMessage(),
+                "Database Error",
+                JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
     // ================= ACTIONS =================
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
