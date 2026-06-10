@@ -353,9 +353,9 @@ private boolean isEmpty(String... fields) {
             options[0]
     );
 
-    // =========================
+  
     // 1. ADD STUDENT (INSERT)
-    // =========================
+   
     if (choice == 0) {
 
     JTextField id = new JTextField();
@@ -476,9 +476,9 @@ private boolean isEmpty(String... fields) {
         }
     }
 
-    // =========================
+    
     // 3. UPDATE STUDENT
-    // =========================
+   
    else if (choice == 2) {
 
     String id = JOptionPane.showInputDialog(this, "Enter Student ID to update:");
@@ -492,7 +492,7 @@ private boolean isEmpty(String... fields) {
                 ""
         );
 
-        // ✅ STEP 1: CHECK IF STUDENT EXISTS FIRST
+        //1: CHECK IF STUDENT EXISTS FIRST
         String checkSql = "SELECT * FROM studentinfo WHERE student_id=?";
         PreparedStatement checkPst = conn.prepareStatement(checkSql);
         checkPst.setString(1, id);
@@ -510,7 +510,7 @@ private boolean isEmpty(String... fields) {
         rs.close();
         checkPst.close();
 
-        // ✅ STEP 2: SHOW UPDATE FORM
+        // 2: SHOW UPDATE FORM
         JTextField name = new JTextField(rs.getString("name"));
         JTextField age = new JTextField(String.valueOf(rs.getInt("age")));
         JComboBox<String> gender = new JComboBox<>(new String[]{"Male", "Female"});
@@ -555,9 +555,9 @@ private boolean isEmpty(String... fields) {
     }
 }
 
-    // =========================
+   
     // 4. DELETE STUDENT
-    // =========================
+   
     else if (choice == 3) {
 
         String id = JOptionPane.showInputDialog(this, "Enter Student ID to delete:");

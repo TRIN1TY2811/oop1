@@ -20,28 +20,28 @@ public class TeacherLogIn extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
 
-        // ================= BACKGROUND =================
+        //  BACKGROUND 
         ImageIcon img = new ImageIcon("C:\\Users\\admin\\Downloads\\pup1.jpg");
         Image scaled = img.getImage().getScaledInstance(800, 750, Image.SCALE_SMOOTH);
         JLabel background = new JLabel(new ImageIcon(scaled));
         background.setLayout(null);
         setContentPane(background);
 
-        // ================= PANEL =================
+        //  PANEL 
         pnlPanel = new JPanel();
         pnlPanel.setLayout(null);
         pnlPanel.setBounds(250, 120, 300, 450);
         pnlPanel.setBackground(new Color(255, 255, 255, 180));
         background.add(pnlPanel);
 
-        // ================= TITLE =================
+        //  TITLE 
         lblTitle = new JLabel("Teacher Login", SwingConstants.CENTER);
         lblTitle.setBounds(40, 40, 220, 40);
         lblTitle.setFont(new Font("Arial", Font.BOLD, 24));
         lblTitle.setForeground(Color.decode("#312E81"));
         pnlPanel.add(lblTitle);
 
-        // ================= USERNAME =================
+        //  USERNAME 
         lblUser = new JLabel("Teacher ID");
         lblUser.setBounds(40, 110, 220, 20);
         lblUser.setForeground(Color.decode("#312E81"));
@@ -51,7 +51,7 @@ public class TeacherLogIn extends JFrame implements ActionListener {
         txtUser.setBounds(40, 135, 220, 35);
         pnlPanel.add(txtUser);
 
-        // ================= PASSWORD =================
+        //  PASSWORD 
         lblPass = new JLabel("Password");
         lblPass.setBounds(40, 185, 220, 20);
         lblPass.setForeground(Color.decode("#312E81"));
@@ -61,25 +61,25 @@ public class TeacherLogIn extends JFrame implements ActionListener {
         txtPass.setBounds(40, 210, 220, 35);
         pnlPanel.add(txtPass);
 
-        // ================= LOGIN BUTTON =================
+        //  LOGIN BUTTON 
         btnLogin = new JButton("Login");
         btnLogin.setBounds(40, 280, 220, 40);
         btnLogin.setFont(new Font("Arial", Font.BOLD, 16));
         pnlPanel.add(btnLogin);
 
-        // ================= FORGOT PASSWORD BUTTON =================
+        //  FORGOT PASSWORD BUTTON 
         btnRegister = new JButton("Forgot Password");
         btnRegister.setBounds(40, 330, 220, 40);
         btnRegister.setFont(new Font("Arial", Font.BOLD, 16));
         pnlPanel.add(btnRegister);
 
-        // ================= BACK BUTTON =================
+        //  BACK BUTTON 
         btnBack = new JButton("Back");
         btnBack.setBounds(40, 380, 220, 40);
         btnBack.setFont(new Font("Arial", Font.BOLD, 16));
         pnlPanel.add(btnBack);
 
-        // ================= ACTION LISTENERS =================
+        //  ACTION LISTENERS 
         btnLogin.addActionListener(this);
         btnRegister.addActionListener(this);
         btnBack.addActionListener(this);
@@ -96,7 +96,7 @@ public class TeacherLogIn extends JFrame implements ActionListener {
         addHoverEffect(btnBack);
     }
     
-    // ================= HOVER EFFECT =================
+    //  HOVER EFFECT 
     public void addHoverEffect(JButton button) {
         button.addMouseListener(new MouseAdapter() {
             @Override
@@ -114,7 +114,7 @@ public class TeacherLogIn extends JFrame implements ActionListener {
         });
     }
 
-    // ================= DATABASE LOGIN CHECK =================
+    // DATABASE LOGIN CHECK 
     private boolean checkLogin(String username, String password) {
 
         try (Connection conn = DriverManager.getConnection(
@@ -145,7 +145,7 @@ public class TeacherLogIn extends JFrame implements ActionListener {
         }
     }
 
-    // ================= ACTION PERFORMED =================
+    //  ACTION PERFORMED 
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -154,7 +154,7 @@ public class TeacherLogIn extends JFrame implements ActionListener {
             String username = txtUser.getText().trim();
             String password = String.valueOf(txtPass.getPassword()).trim();
 
-            // ===== EMPTY CHECK =====
+            //  EMPTY CHECK 
             if (username.isEmpty() || password.isEmpty()) {
                 JOptionPane.showMessageDialog(
                     this,
@@ -165,7 +165,7 @@ public class TeacherLogIn extends JFrame implements ActionListener {
                 return;
             }
 
-            // ===== DATABASE CHECK =====
+            //  DATABASE CHECK 
             if (checkLogin(username, password)) {
                 dispose();
                 TeacherDashB tdb = new TeacherDashB();
@@ -180,14 +180,14 @@ public class TeacherLogIn extends JFrame implements ActionListener {
             }
         }
 
-        // ================= FORGOT PASSWORD =================
+        //  FORGOT PASSWORD 
         else if (e.getSource() == btnRegister) {
             dispose();
             TeacherForgotPassword teachforg = new TeacherForgotPassword();
             teachforg.setVisible(true);
         }
 
-        // ================= BACK =================
+        //  BACK 
         else if (e.getSource() == btnBack) {
             dispose();
             Homepage hp = new Homepage();

@@ -20,28 +20,28 @@ public class StudentInfo extends JFrame {
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // ================= BACKGROUND =================
+        //  BACKGROUND 
         ImageIcon img = new ImageIcon("C:\\Users\\admin\\Downloads\\pup1.jpg");
         Image scaled = img.getImage().getScaledInstance(800, 750, Image.SCALE_SMOOTH);
         JLabel background = new JLabel(new ImageIcon(scaled));
         background.setLayout(null);
         setContentPane(background);
 
-        // ================= MAIN PANEL =================
+        //  MAIN PANEL 
         JPanel panel = new JPanel();
         panel.setLayout(null);
         panel.setBounds(80, 40, 640, 660);
         panel.setBackground(new Color(255, 255, 255, 180));
         background.add(panel);
 
-        // ================= TITLE =================
+        //  TITLE 
         JLabel title = new JLabel("Student List", SwingConstants.CENTER);
         title.setBounds(0, 15, 640, 40);
         title.setFont(new Font("Arial", Font.BOLD, 24));
         title.setForeground(Color.decode("#312E81"));
         panel.add(title);
 
-        // ================= TABLE =================
+        //  TABLE 
         model = new DefaultTableModel(
             new String[]{"StudentID", "Name", "Age", "Gender", "Birthday"}, 0) {
             @Override
@@ -57,7 +57,7 @@ public class StudentInfo extends JFrame {
         scroll.setBounds(30, 70, 580, 250);
         panel.add(scroll);
 
-        // ================= CLICK TO POPULATE FIELDS =================
+        //  CLICK TO POPULATE FIELDS 
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -73,7 +73,7 @@ public class StudentInfo extends JFrame {
             }
         });
 
-        // ================= INPUT FIELDS =================
+        //  INPUT FIELDS 
         int labelX = 30, fieldX = 160, fieldW = 180, rowH = 35;
         int startY = 345;
 
@@ -98,7 +98,7 @@ public class StudentInfo extends JFrame {
         hint.setFont(new Font("Arial", Font.ITALIC, 11));
         panel.add(hint);
 
-        // ================= BUTTONS =================
+        //  BUTTONS 
         int btnY = startY + rowH * 5 + 15;
         int btnW = 110, btnH = 35;
 
@@ -126,7 +126,7 @@ public class StudentInfo extends JFrame {
         loadData();
     }
 
-    // ================= HELPER: LABEL =================
+    //  HELPER: LABEL 
     private void addLabel(JPanel panel, String text, int x, int y) {
         JLabel lbl = new JLabel(text);
         lbl.setBounds(x, y, 120, 30);
@@ -135,7 +135,7 @@ public class StudentInfo extends JFrame {
         panel.add(lbl);
     }
 
-    // ================= HELPER: FIELD =================
+    //  HELPER: FIELD 
     private JTextField addField(JPanel panel, int x, int y, int w) {
         JTextField tf = new JTextField();
         tf.setBounds(x, y, w, 30);
@@ -143,7 +143,7 @@ public class StudentInfo extends JFrame {
         return tf;
     }
 
-    // ================= HELPER: BUTTON =================
+    //  HELPER: BUTTON 
     private JButton createButton(String text, int x, int y, int w, int h) {
         JButton btn = new JButton(text);
         btn.setBounds(x, y, w, h);
@@ -165,7 +165,7 @@ public class StudentInfo extends JFrame {
         return btn;
     }
 
-    // ================= LOAD DATA =================
+    //  LOAD DATA 
     private void loadData() {
 
         try (Connection conn = DriverManager.getConnection(
@@ -196,7 +196,7 @@ public class StudentInfo extends JFrame {
         }
     }
 
-    // ================= ADD STUDENT =================
+    //  ADD STUDENT 
     private void addStudent() {
 
         if (!validateFields()) return;
@@ -247,7 +247,7 @@ public class StudentInfo extends JFrame {
         }
     }
 
-    // ================= UPDATE STUDENT =================
+    //  UPDATE STUDENT 
     private void updateStudent() {
 
         if (!validateFields()) return;
@@ -292,7 +292,7 @@ public class StudentInfo extends JFrame {
         }
     }
 
-    // ================= DELETE STUDENT =================
+    //  DELETE STUDENT 
     private void deleteStudent() {
 
         String id = txtID.getText().trim();
@@ -340,7 +340,7 @@ public class StudentInfo extends JFrame {
         }
     }
 
-    // ================= CLEAR FIELDS =================
+    //  CLEAR FIELDS 
     private void clearFields() {
         txtID.setText("");
         txtName.setText("");
@@ -351,7 +351,7 @@ public class StudentInfo extends JFrame {
         table.clearSelection();
     }
 
-    // ================= VALIDATE FIELDS =================
+    //  VALIDATE FIELDS 
     private boolean validateFields() {
         if (txtID.getText().trim().isEmpty()
                 || txtName.getText().trim().isEmpty()

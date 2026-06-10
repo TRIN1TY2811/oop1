@@ -16,7 +16,7 @@ public class Student1Grades extends JFrame implements ActionListener {
 
     private JButton btnOOP, btnInteg, btnCP, btnNet, btnOS;
 
-    // ===== OOP =====
+    //  OOP 
     private JTextField[] oopID         = new JTextField[10];
     private JTextField[] oopName       = new JTextField[10];
     private JTextField[] oopQuiz       = new JTextField[10];
@@ -24,7 +24,7 @@ public class Student1Grades extends JFrame implements ActionListener {
     private JTextField[] oopExam       = new JTextField[10];
     private JTextField[] oopFinalGrade = new JTextField[10];
 
-    // ===== INTEG =====
+    //  INTEG 
     private JTextField[] integID         = new JTextField[10];
     private JTextField[] integName       = new JTextField[10];
     private JTextField[] integQuiz       = new JTextField[10];
@@ -32,7 +32,7 @@ public class Student1Grades extends JFrame implements ActionListener {
     private JTextField[] integExam       = new JTextField[10];
     private JTextField[] integFinalGrade = new JTextField[10];
 
-    // ===== CP =====
+    //  CP 
     private JTextField[] cpID         = new JTextField[10];
     private JTextField[] cpName       = new JTextField[10];
     private JTextField[] cpQuiz       = new JTextField[10];
@@ -40,7 +40,7 @@ public class Student1Grades extends JFrame implements ActionListener {
     private JTextField[] cpExam       = new JTextField[10];
     private JTextField[] cpFinalGrade = new JTextField[10];
 
-    // ===== NET =====
+    //  NET 
     private JTextField[] netID         = new JTextField[10];
     private JTextField[] netName       = new JTextField[10];
     private JTextField[] netQuiz       = new JTextField[10];
@@ -48,7 +48,7 @@ public class Student1Grades extends JFrame implements ActionListener {
     private JTextField[] netExam       = new JTextField[10];
     private JTextField[] netFinalGrade = new JTextField[10];
 
-    // ===== OS =====
+    //  OS 
     private JTextField[] osID         = new JTextField[10];
     private JTextField[] osName       = new JTextField[10];
     private JTextField[] osQuiz       = new JTextField[10];
@@ -64,7 +64,7 @@ public class Student1Grades extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setBackground(Color.WHITE);
 
-        // ===== SEARCH BAR =====
+        //  SEARCH BAR 
         JLabel lbl = new JLabel("Enter Student ID or Name:");
         lbl.setBounds(200, 20, 200, 30);
         add(lbl);
@@ -85,7 +85,7 @@ public class Student1Grades extends JFrame implements ActionListener {
         btnSearch.addActionListener(this);
         add(btnSearch);
 
-        // ===== SIDE MENU =====
+        //  SIDE MENU 
         JPanel side = new JPanel();
         side.setLayout(null);
         side.setBounds(0, 0, 180, 700);
@@ -110,7 +110,7 @@ public class Student1Grades extends JFrame implements ActionListener {
         btnNet.addActionListener(this);
         btnOS.addActionListener(this);
 
-        // ===== MAIN PANEL =====
+        //  MAIN PANEL 
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
         mainPanel.setBounds(200, 80, 760, 550);
@@ -122,7 +122,7 @@ public class Student1Grades extends JFrame implements ActionListener {
         mainPanel.add(createNetPanel(),   "NET");
         mainPanel.add(createOSPanel(),    "OS");
 
-        // ===== BACK BUTTON =====
+        //  BACK BUTTON 
         btnBack = new JButton("Back");
         btnBack.setBounds(820, 610, 150, 40);
         btnBack.addActionListener(this);
@@ -134,7 +134,7 @@ public class Student1Grades extends JFrame implements ActionListener {
         searchAll();
     }
 
-    // ================= PANEL BUILDERS =================
+    //  PANEL BUILDERS 
 
     private JPanel createOOPPanel() {
         JPanel panel = new JPanel(null);
@@ -221,7 +221,7 @@ public class Student1Grades extends JFrame implements ActionListener {
         return panel;
     }
 
-    // ================= SHARED HELPERS =================
+    //  SHARED HELPERS 
 
     private void addTitle(JPanel panel, String text) {
         JLabel title = new JLabel(text, SwingConstants.CENTER);
@@ -255,7 +255,7 @@ public class Student1Grades extends JFrame implements ActionListener {
         return b;
     }
 
-    // ================= SEARCH ALL TABLES =================
+    //  SEARCH ALL TABLES 
 
     private void searchAll() {
         loadTable("oopgrades",   oopID,   oopName,   oopQuiz,   oopProject,   oopExam,   oopFinalGrade);
@@ -265,7 +265,7 @@ public class Student1Grades extends JFrame implements ActionListener {
         loadTable("osgrades",    osID,    osName,    osQuiz,    osProject,    osExam,    osFinalGrade);
     }
 
-    // ================= REUSABLE LOADER =================
+    //  REUSABLE LOADER 
 
     private void loadTable(String table,
                            JTextField[] id,
@@ -327,7 +327,7 @@ public class Student1Grades extends JFrame implements ActionListener {
         }
     }
 
-    // ================= ACTIONS =================
+    //  ACTIONS 
 
     @Override
     public void actionPerformed(ActionEvent e) {

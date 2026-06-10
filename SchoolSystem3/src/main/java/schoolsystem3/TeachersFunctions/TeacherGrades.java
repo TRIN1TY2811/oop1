@@ -52,7 +52,7 @@ public class TeacherGrades extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setBackground(Color.WHITE);
 
-        // ================= SIDEBAR =================
+        //  SIDEBAR 
         pnlSideBar = new JPanel();
         pnlSideBar.setLayout(null);
         pnlSideBar.setBounds(0, 0, 180, 750);
@@ -75,7 +75,7 @@ public class TeacherGrades extends JFrame implements ActionListener {
         pnlSideBar.add(btnNetAd);
         pnlSideBar.add(btnOS);
 
-        // ================= MAIN PANEL =================
+        //  MAIN PANEL 
         cardLayout = new CardLayout();
         pnlMain = new JPanel(cardLayout);
         pnlMain.setBounds(200, 0, 800, 550);
@@ -88,12 +88,12 @@ public class TeacherGrades extends JFrame implements ActionListener {
 
         add(pnlMain);
 
-        // ================= BUTTONS =================
+        //  BUTTONS 
         btnback = new JButton("Back");
         btnback.setBounds(650, 620, 100, 30);
         add(btnback);
 
-        // ================= ACTIONS =================
+        //  ACTIONS 
         btnOOP.addActionListener(this);
         btnInteg.addActionListener(this);
         btnCP.addActionListener(this);
@@ -104,7 +104,7 @@ public class TeacherGrades extends JFrame implements ActionListener {
         cardLayout.show(pnlMain, "OOP");      
     }
 
-    // ================= OOP PANEL =================
+    //  OOP PANEL 
     private JPanel createOOPPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(null);
@@ -169,7 +169,7 @@ public class TeacherGrades extends JFrame implements ActionListener {
         return lbl;
     }
 
-    // ================= INTEG PANEL =================
+    //  INTEG PANEL 
     private JPanel createIntegPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(null);
@@ -227,7 +227,7 @@ public class TeacherGrades extends JFrame implements ActionListener {
         return panel;
     }
 
-    // ================= CP PANEL =================
+    //  CP PANEL 
     private JPanel createCompPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(null);
@@ -285,7 +285,7 @@ public class TeacherGrades extends JFrame implements ActionListener {
         return panel;
     }
 
-    // ================= NET PANEL =================
+    //  NET PANEL 
     private JPanel createNetAdPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(null);
@@ -343,7 +343,7 @@ public class TeacherGrades extends JFrame implements ActionListener {
         return panel;
     }
 
-    // ================= OS PANEL =================
+    //  OS PANEL 
     private JPanel createOSPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(null);
@@ -426,7 +426,7 @@ public class TeacherGrades extends JFrame implements ActionListener {
     }
 }
 
-    // ================= ACTIONS =================
+    //  ACTIONS 
     @Override
     public void actionPerformed(ActionEvent e) {
         
@@ -461,12 +461,12 @@ else if (e.getSource() == btncomp5) { performcomputation(osWeek); } {
             cardLayout.show(pnlMain, "OS");
         }
         
-        // ================= RETRIEVE ALL DATA =================
+        //  RETRIEVE ALL DATA 
         else if (e.getSource() == btnSearch || e.getSource() == btnSearch2 || e.getSource() == btnSearch3 || e.getSource() == btnSearch4 || e.getSource() == btnSearch5) {
             executeDatabaseSearch();
         }
 
-        // ================= DIALOG INPUT DELETE =================
+        //  DIALOG INPUT DELETE 
         else if (e.getSource() == btnDelete || e.getSource() == btnDelete2 || e.getSource() == btnDelete3 || e.getSource() == btnDelete4 || e.getSource() == btnDelete5) {
             String deleteID = JOptionPane.showInputDialog(this, "Enter Student ID to delete:");
             if (deleteID != null && !deleteID.trim().isEmpty()) {
@@ -474,8 +474,8 @@ else if (e.getSource() == btncomp5) { performcomputation(osWeek); } {
             }
         }
 
-        // ================= SUBMIT OOP =================
-       // ================= SUBMIT OOP =================
+        //  SUBMIT OOP 
+       //  SUBMIT OOP 
 else if (e.getSource() == btnSubmit) {
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -528,7 +528,7 @@ else if (e.getSource() == btnSubmit) {
 }
         
        
-      // ================= SUBMIT INTEG =================
+      //  SUBMIT INTEG 
     else if (e.getSource() == btnSubmit2) {
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -554,14 +554,14 @@ else if (e.getSource() == btnSubmit) {
             savedRows++;
         }
         
-        // --- THIS IS THE FIX ---
+        //  THIS IS THE FIX 
         if (savedRows > 0) {
             JOptionPane.showMessageDialog(this, savedRows + " new Integrative Grade(s) saved successfully!");
            // executeDatabaseSearch(); // Only refreshes if data was actually saved
         } else {
             JOptionPane.showMessageDialog(this, "No new data to save.");
         }
-        // -----------------------
+      
 
         pst.close(); 
         conn.close();
@@ -571,7 +571,7 @@ else if (e.getSource() == btnSubmit) {
     }
 }
         
-        // ================= SUBMIT CP =================
+        //  SUBMIT CP 
 else if (e.getSource() == btnSubmit3) {
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -597,14 +597,14 @@ else if (e.getSource() == btnSubmit3) {
             savedRows++;
         }
         
-        // --- THIS IS THE FIX ---
+     
         if (savedRows > 0) {
             JOptionPane.showMessageDialog(this, savedRows + " new CP Grade(s) saved successfully!");
-           // executeDatabaseSearch(); // Only refreshes if data was actually saved
+           
         } else {
             JOptionPane.showMessageDialog(this, "No new data to save.");
         }
-        // -----------------------
+        
 
         pst.close(); 
         conn.close();
@@ -614,7 +614,7 @@ else if (e.getSource() == btnSubmit3) {
     }
 }
 
-        // ================= SUBMIT NET =================
+        //  SUBMIT NET 
     else if (e.getSource() == btnSubmit4) {
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
@@ -642,14 +642,14 @@ else if (e.getSource() == btnSubmit3) {
         
         
         
-        // --- THIS IS THE FIX ---
+        //  THIS IS THE FIX 
         if (savedRows > 0) {
             JOptionPane.showMessageDialog(this, savedRows + " new Network Grade(s) saved successfully!");
            // executeDatabaseSearch(); // Only refreshes if data was actually saved
         } else {
             JOptionPane.showMessageDialog(this, "No new data to save.");
         }
-        // -----------------------
+        // 
 
         pst.close(); 
         conn.close();
@@ -685,14 +685,14 @@ else if (e.getSource() == btnSubmit3) {
             savedRows++;
         }
         
-        // --- FIX APPLIED ---
+        //  FIX APPLIED 
         if (savedRows > 0) {
             JOptionPane.showMessageDialog(this, savedRows + " new OS Grade(s) saved successfully!");
            // executeDatabaseSearch(); // Only refreshes if data was actually saved
         } else {
             JOptionPane.showMessageDialog(this, "No new data to save.");
         }
-        // -----------------------
+        // 
 
         pst.close(); 
         conn.close();
@@ -702,7 +702,7 @@ else if (e.getSource() == btnSubmit3) {
     }
 }
 
-        // ================= UPDATE OOP =================
+        //  UPDATE OOP 
         else if (e.getSource() == btnUpdate) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -727,7 +727,7 @@ else if (e.getSource() == btnSubmit3) {
             } catch (Exception ex) { ex.printStackTrace(); }
         }
 
-        // ================= UPDATE INTEG =================
+        //  UPDATE INTEG 
         else if (e.getSource() == btnUpdate2) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -752,7 +752,7 @@ else if (e.getSource() == btnSubmit3) {
             } catch (Exception ex) { ex.printStackTrace(); }
         }
 
-        // ================= UPDATE CP =================
+        //  UPDATE CP 
         else if (e.getSource() == btnUpdate3) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -777,7 +777,7 @@ else if (e.getSource() == btnSubmit3) {
             } catch (Exception ex) { ex.printStackTrace(); }
         }
 
-        // ================= UPDATE NET =================
+        //  UPDATE NET 
         else if (e.getSource() == btnUpdate4) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -802,7 +802,7 @@ else if (e.getSource() == btnSubmit3) {
             } catch (Exception ex) { ex.printStackTrace(); }
         }
 
-        // ================= UPDATE OS =================
+        //  UPDATE OS 
         else if (e.getSource() == btnUpdate5) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
@@ -828,7 +828,7 @@ else if (e.getSource() == btnSubmit3) {
         }
     }
     }
-    // ================= EXECUTE DATABASE RETRIEVAL =================
+    //  EXECUTE DATABASE RETRIEVAL 
     private void executeDatabaseSearch() {
         String sql = "";
         if (currentTab.equals("OOP")) sql = "SELECT * FROM oopgrades LIMIT 10";
@@ -872,7 +872,7 @@ else if (e.getSource() == btnSubmit3) {
         }
     }
 
-    // ================= EXECUTE DATABASE DELETION WITH GUI REFRESH =================
+    // EXECUTE DATABASE DELETION WITH GUI REFRESH 
     private void executeDatabaseDelete(String targetID) {
         String sql = "";
         if (currentTab.equals("OOP")) sql = "DELETE FROM oopgrades WHERE student_id = ?";

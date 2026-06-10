@@ -24,7 +24,7 @@ public class StudentViewInfo extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setBackground(Color.WHITE);
 
-        // ===== SEARCH BAR =====
+        //  SEARCH BAR 
         JLabel lbl = new JLabel("Enter Student ID or Name:");
         lbl.setBounds(200, 20, 200, 30);
         add(lbl);
@@ -45,7 +45,7 @@ public class StudentViewInfo extends JFrame implements ActionListener {
         btnSearch.addActionListener(this);
         add(btnSearch);
 
-        // ===== SIDE PANEL =====
+        //  SIDE PANEL 
         JPanel side = new JPanel();
         side.setLayout(null);
         side.setBounds(0, 0, 180, 700);
@@ -58,19 +58,19 @@ public class StudentViewInfo extends JFrame implements ActionListener {
 
         add(side);
 
-        // ===== MAIN PANEL =====
+        //  MAIN PANEL 
         JPanel mainPanel = new JPanel(null);
         mainPanel.setBounds(200, 80, 760, 550);
         mainPanel.setBackground(Color.WHITE);
         add(mainPanel);
 
-        // ===== TITLE =====
+        //  TITLE 
         JLabel title = new JLabel("Student Information", SwingConstants.CENTER);
         title.setBounds(0, 10, 760, 30);
         title.setFont(new Font("Arial", Font.BOLD, 18));
         mainPanel.add(title);
 
-        // ===== HEADERS =====
+        //  HEADERS 
         String[] headers = { "ID", "Name", "Age", "Gender", "Birthday" };
         int[]    xPos    = {  20,   120,    310,    400,      500       };
         int[]    widths  = {  80,   180,     80,     90,      200       };
@@ -82,7 +82,7 @@ public class StudentViewInfo extends JFrame implements ActionListener {
             mainPanel.add(h);
         }
 
-        // ===== ROWS =====
+        //  ROWS 
         for (int i = 0; i < 10; i++) {
             int y = 100 + (i * 35);
             infoID[i]       = createField(mainPanel, xPos[0], y, widths[0]);
@@ -92,7 +92,7 @@ public class StudentViewInfo extends JFrame implements ActionListener {
             infoBirthday[i] = createField(mainPanel, xPos[4], y, widths[4]);
         }
 
-        // ===== BACK BUTTON =====
+        //  BACK BUTTON 
         btnBack = new JButton("Back");
         btnBack.setBounds(820, 610, 150, 40);
         btnBack.addActionListener(this);
@@ -104,7 +104,7 @@ public class StudentViewInfo extends JFrame implements ActionListener {
         loadTable();
     }
 
-    // ================= FIELD HELPER =================
+    //  FIELD HELPER 
 
     private JTextField createField(JPanel panel, int x, int y, int width) {
         JTextField t = new JTextField();
@@ -114,7 +114,7 @@ public class StudentViewInfo extends JFrame implements ActionListener {
         return t;
     }
 
-    // ================= LOAD TABLE =================
+    //  LOAD TABLE 
 
     private void loadTable() {
 
@@ -168,7 +168,7 @@ public class StudentViewInfo extends JFrame implements ActionListener {
         }
     }
 
-    // ================= ACTIONS =================
+    //  ACTIONS 
 
     @Override
     public void actionPerformed(ActionEvent e) {

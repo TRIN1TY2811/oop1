@@ -17,27 +17,27 @@ public class Student1Attendance extends JFrame implements ActionListener {
 
     private JButton btnOOP, btnInteg, btnCP, btnNet, btnOS;
 
-    // ===== OOP =====
+    // OOP 
     private JTextField[] oopID = new JTextField[10];
     private JTextField[] oopName = new JTextField[10];
     private JTextField[][] oopWeek = new JTextField[10][5];
 
-    // ===== INTEG =====
+    //INTEG 
     private JTextField[] integID = new JTextField[10];
     private JTextField[] integName = new JTextField[10];
     private JTextField[][] integWeek = new JTextField[10][5];
 
-    // ===== CP =====
+    //  CP 
     private JTextField[] cpID = new JTextField[10];
     private JTextField[] cpName = new JTextField[10];
     private JTextField[][] cpWeek = new JTextField[10][5];
 
-    // ===== NET =====
+    //  NET 
     private JTextField[] netID = new JTextField[10];
     private JTextField[] netName = new JTextField[10];
     private JTextField[][] netWeek = new JTextField[10][5];
 
-    // ===== OS =====
+    //  OS 
     private JTextField[] osID = new JTextField[10];
     private JTextField[] osName = new JTextField[10];
     private JTextField[][] osWeek = new JTextField[10][5];
@@ -50,7 +50,7 @@ public class Student1Attendance extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         getContentPane().setBackground(Color.WHITE);
 
-        // ===== SEARCH BAR =====
+        //  SEARCH BAR 
         JLabel lbl = new JLabel("Enter Student ID or Name:");
         lbl.setBounds(200, 20, 200, 30);
         add(lbl);
@@ -64,7 +64,7 @@ public class Student1Attendance extends JFrame implements ActionListener {
         btnSearch.addActionListener(this);
         add(btnSearch);
 
-        // ===== SIDE MENU =====
+        //  SIDE MENU 
         JPanel side = new JPanel();
         side.setLayout(null);
         side.setBounds(0, 0, 180, 700);
@@ -89,7 +89,7 @@ public class Student1Attendance extends JFrame implements ActionListener {
         btnNet.addActionListener(this);
         btnOS.addActionListener(this);
 
-        // ===== MAIN PANEL =====
+        //  MAIN PANEL 
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
         mainPanel.setBounds(200, 80, 760, 550);
@@ -101,7 +101,7 @@ public class Student1Attendance extends JFrame implements ActionListener {
         mainPanel.add(createPanel("NET", netID, netName, netWeek), "NET");
         mainPanel.add(createPanel("OS", osID, osName, osWeek), "OS");
 
-        // ===== BACK BUTTON =====
+        // BACK BUTTON
         btnBack = new JButton("Back");
         btnBack.setBounds(820, 610, 150, 40);
         btnBack.addActionListener(this);
@@ -110,7 +110,7 @@ public class Student1Attendance extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    // ================= PANEL CREATOR =================
+    //  PANEL CREATOR 
     private JPanel createPanel(String titleText,
                                JTextField[] id,
                                JTextField[] name,
@@ -172,7 +172,7 @@ public class Student1Attendance extends JFrame implements ActionListener {
         return b;
     }
 
-    // ================= SEARCH ALL TABLES =================
+    //  SEARCH ALL TABLES 
     private void searchAll() {
 
         loadTable("oopattendance", oopID, oopName, oopWeek);
@@ -182,7 +182,7 @@ public class Student1Attendance extends JFrame implements ActionListener {
         loadTable("osattendance", osID, osName, osWeek);
     }
 
-    // ================= REUSABLE LOADER =================
+    //  REUSABLE LOADER 
     private void loadTable(String table,
                            JTextField[] id,
                            JTextField[] name,
@@ -238,7 +238,7 @@ public class Student1Attendance extends JFrame implements ActionListener {
         }
     }
 
-    // ================= ACTIONS =================
+    //  ACTIONS 
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == btnSearch) {

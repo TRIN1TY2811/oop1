@@ -95,7 +95,7 @@ public class TeacherForgotPassword extends JFrame implements ActionListener {
         return tf;
     }
 
-    // ================= DATABASE RESET =================
+    //  DATABASE RESET 
     private boolean resetPassword(String username, String newPassword) {
 
         try (Connection conn = DriverManager.getConnection(
@@ -152,7 +152,7 @@ public class TeacherForgotPassword extends JFrame implements ActionListener {
             String pass1    = new String(txtNewPass.getPassword()).trim();
             String pass2    = new String(txtConfirmPass.getPassword()).trim();
 
-            // ===== EMPTY CHECK =====
+            //  EMPTY CHECK 
             if (username.isEmpty() || pass1.isEmpty() || pass2.isEmpty()) {
                 JOptionPane.showMessageDialog(
                     this,
@@ -163,7 +163,7 @@ public class TeacherForgotPassword extends JFrame implements ActionListener {
                 return;
             }
 
-            // ===== PASSWORD MATCH CHECK =====
+            //  PASSWORD MATCH CHECK 
             if (!pass1.equals(pass2)) {
                 JOptionPane.showMessageDialog(
                     this,
@@ -174,7 +174,7 @@ public class TeacherForgotPassword extends JFrame implements ActionListener {
                 return;
             }
 
-            // ===== DATABASE UPDATE =====
+            //  DATABASE UPDATE 
             if (resetPassword(username, pass1)) {
                 JOptionPane.showMessageDialog(
                     this,
