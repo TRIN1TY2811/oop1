@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 import javax.swing.*;
-import schoolsystem3.TeachersFunctions.TeacherDashB;
 
 public class JamesEarlAttendance extends JFrame implements ActionListener {
 
@@ -754,7 +753,7 @@ public class JamesEarlAttendance extends JFrame implements ActionListener {
     //  EXECUTE DATABASE RETRIEVAL 
     private void executeDatabaseSearch() {
         String sql = "";
-        if (currentTab.equals("OOP")) sql = "SELECT ID, Name FROM studentinfo";
+        if (currentTab.equals("OOP")) sql = "SELECT * FROM oopattendance LIMIT 10";
         else if (currentTab.equals("INTEG")) sql = "SELECT * FROM integattendance LIMIT 10";
         else if (currentTab.equals("CP")) sql = "SELECT * FROM cpattendance LIMIT 10";
         else if (currentTab.equals("NET")) sql = "SELECT * FROM netattendance LIMIT 10";
@@ -834,4 +833,3 @@ public class JamesEarlAttendance extends JFrame implements ActionListener {
         return btn;
     }   
 }
-
