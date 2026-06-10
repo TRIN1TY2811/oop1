@@ -2,12 +2,13 @@ package schoolsystem3;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.*;
 import javax.swing.*;
 import schoolsystem3.TeacherLogIn;
 
 public class TeacherForgotPassword extends JFrame implements ActionListener {
 
-    private JTextField txtId, txtEmail;
+    private JTextField txtUsername;
     private JPasswordField txtNewPass, txtConfirmPass;
     private JButton btnReset, btnBack;
     private JLabel lblTitle;
@@ -30,7 +31,7 @@ public class TeacherForgotPassword extends JFrame implements ActionListener {
         // PANEL
         pnlPanel = new JPanel();
         pnlPanel.setLayout(null);
-        pnlPanel.setBounds(230, 80, 340, 560);
+        pnlPanel.setBounds(230, 150, 340, 420);
         pnlPanel.setBackground(new Color(255, 255, 255, 180));
         background.add(pnlPanel);
 
@@ -41,35 +42,31 @@ public class TeacherForgotPassword extends JFrame implements ActionListener {
         lblTitle.setForeground(Color.decode("#312E81"));
         pnlPanel.add(lblTitle);
 
-        // TEACHER ID
-        addLabel("Teacher ID", 70);
-        txtId = addField(95);
-
-        // EMAIL
-        addLabel("Email / Username", 150);
-        txtEmail = addField(175);
+        // USERNAME
+        addLabel("Username", 80);
+        txtUsername = addField(105);
 
         // NEW PASSWORD
-        addLabel("New Password", 230);
+        addLabel("New Password", 150);
         txtNewPass = new JPasswordField();
-        txtNewPass.setBounds(60, 255, 220, 30);
+        txtNewPass.setBounds(60, 175, 220, 30);
         pnlPanel.add(txtNewPass);
 
         // CONFIRM PASSWORD
-        addLabel("Confirm Password", 310);
+        addLabel("Confirm Password", 220);
         txtConfirmPass = new JPasswordField();
-        txtConfirmPass.setBounds(60, 335, 220, 30);
+        txtConfirmPass.setBounds(60, 245, 220, 30);
         pnlPanel.add(txtConfirmPass);
 
         // RESET BUTTON
         btnReset = new JButton("Reset Password");
-        btnReset.setBounds(60, 405, 220, 40);
+        btnReset.setBounds(60, 310, 220, 40);
         btnReset.setFont(new Font("Arial", Font.BOLD, 14));
         pnlPanel.add(btnReset);
 
         // BACK BUTTON
         btnBack = new JButton("Back");
-        btnBack.setBounds(60, 460, 220, 35);
+        btnBack.setBounds(60, 360, 220, 35);
         pnlPanel.add(btnBack);
 
         btnReset.addActionListener(this);
@@ -77,7 +74,6 @@ public class TeacherForgotPassword extends JFrame implements ActionListener {
 
         btnReset.setForeground(Color.decode("#1E1B4B"));
         btnReset.setBackground(Color.decode("#BEE9FF"));
-
         btnBack.setForeground(Color.decode("#1E1B4B"));
         btnBack.setBackground(Color.decode("#BEE9FF"));
 
@@ -99,58 +95,100 @@ public class TeacherForgotPassword extends JFrame implements ActionListener {
         return tf;
     }
 
+    // ================= DATABASE RESET =================
+    private boolean resetPassword(String username, String newPassword) {
+
+        try (Connection conn = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/schoolsystemdb",
+                "root",
+                "")) {
+
+            // Check if Username exists
+            PreparedStatement checkPst = conn.prepareStatement(
+                "SELECT * FROM users WHERE Username = ?"
+            );
+            checkPst.setString(1, username);
+
+            ResultSet rs = checkPst.executeQuery();
+
+            if (!rs.next()) {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Username not found!",
+                    "Not Found",
+                    JOptionPane.ERROR_MESSAGE
+                );
+                return false;
+            }
+
+            // Update the password
+            PreparedStatement updatePst = conn.prepareStatement(
+                "UPDATE users SET Password = ? WHERE Username = ?"
+            );
+            updatePst.setString(1, newPassword);
+            updatePst.setString(2, username);
+
+            int rows = updatePst.executeUpdate();
+            return rows > 0;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(
+                this,
+                "Database connection failed: " + ex.getMessage(),
+                "Connection Error",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return false;
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == btnReset) {
 
-            String teacherId = txtId.getText().trim();
-            String email = txtEmail.getText().trim();
-            String pass1 = new String(txtNewPass.getPassword()).trim();
-            String pass2 = new String(txtConfirmPass.getPassword()).trim();
+            String username = txtUsername.getText().trim();
+            String pass1    = new String(txtNewPass.getPassword()).trim();
+            String pass2    = new String(txtConfirmPass.getPassword()).trim();
 
-            // Check empty fields
-            if (teacherId.isEmpty()
-                    || email.isEmpty()
-                    || pass1.isEmpty()
-                    || pass2.isEmpty()) {
-
+            // ===== EMPTY CHECK =====
+            if (username.isEmpty() || pass1.isEmpty() || pass2.isEmpty()) {
                 JOptionPane.showMessageDialog(
-                        this,
-                        "Please fill in all fields!",
-                        "Error",
-                        JOptionPane.WARNING_MESSAGE
+                    this,
+                    "Please fill in all fields!",
+                    "Error",
+                    JOptionPane.WARNING_MESSAGE
                 );
                 return;
             }
 
-            // Check passwords match
+            // ===== PASSWORD MATCH CHECK =====
             if (!pass1.equals(pass2)) {
-
                 JOptionPane.showMessageDialog(
-                        this,
-                        "Passwords do not match!",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE
+                    this,
+                    "Passwords do not match!",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
                 );
                 return;
             }
 
-            // Success
-            JOptionPane.showMessageDialog(
+            // ===== DATABASE UPDATE =====
+            if (resetPassword(username, pass1)) {
+                JOptionPane.showMessageDialog(
                     this,
                     "Password Reset Successful!",
                     "Success",
                     JOptionPane.INFORMATION_MESSAGE
-            );
-
-            dispose();
-            TeacherLogIn teachLog = new TeacherLogIn();
-            teachLog.setVisible(true);
+                );
+                dispose();
+                TeacherLogIn teachLog = new TeacherLogIn();
+                teachLog.setVisible(true);
+            }
         }
 
         else if (e.getSource() == btnBack) {
-
             dispose();
             TeacherLogIn teachLog = new TeacherLogIn();
             teachLog.setVisible(true);
